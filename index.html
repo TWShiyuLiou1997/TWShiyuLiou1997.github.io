@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline';">
+    
+    <title>TW641 | Padavan CAKE 開源路由器韌體中心</title>
+
+    <link rel="canonical" href="https://tw641.github.io/">
+
+    <meta name="google-site-verification" content="-vHIVPvpGauTz39uKyANi2BPSfJwrsrxGVMagKliEgE" />
+    <meta name="google-site-verification" content="OV7xROgDy7S6bx5Mrsf5hefCfoKkRYgE0F9raeoZ8qc" />
+    
+    <meta name="description" content="TW641 Padavan CAKE 開源路由器韌體中心。致力於對抗 Bufferbloat 網路延遲，提供多款經典路由器的 Padavan-CAKE 雲端編譯懶人包，以及核心演算法的獨立移植 (port/backport)，為老舊設備注入新生命。">
+    <meta name="keywords" content="Padavan, CAKE, SQM, Bufferbloat, 路由器, 韌體, 開源, 開放原始碼, 固件, TW641, 雲端編譯, sch_cake, mobile01, mobile01.com, ptt, ptt.cc, right, right.com.cn, 恩山, 恩山无线论坛, 恩山無線論壇, 恩山論壇, 論壇, 论坛, 刷機, 路由器刷機, 第三方韌體, 第三方固件, 老毛子, 老毛子固件, OpenWrt, Tomato, 網路優化, 降低延遲, K2P, DIR-878, MI-R3G, GL.iNet, 移植, port, backport">
+    <meta name="author" content="TW641">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
+    <link rel="canonical" href="https://tw641.github.io/">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://tw641.github.io/sitemap.xml">
+    
+    <link rel="icon" href="https://github.com/TW641.png" type="image/png">
+
+    <meta name="theme-color" content="#f6f8fa" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tw641.github.io/">
+    <meta property="og:title" content="TW641 | Padavan CAKE 開源路由器韌體中心">
+    <meta property="og:description" content="提供多款路由器的 Padavan-CAKE 雲端編譯懶人包與演算法移植 (port/backport)，致力對抗 Bufferbloat，讓老設備發揮極致效能。">
+    <meta property="og:image" content="https://tw641.github.io/Padavan-CAKE/images/Tomato-Phoenix-Archive.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TW641 | Padavan CAKE 開源路由器韌體中心">
+    <meta name="twitter:description" content="提供多款路由器的 Padavan-CAKE 雲端編譯懶人包與演算法移植 (port/backport)，致力對抗 Bufferbloat。">
+    <meta name="twitter:image" content="https://tw641.github.io/Padavan-CAKE/images/Tomato-Phoenix-Archive.png">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "@id": "https://tw641.github.io/#website",
+                "url": "https://tw641.github.io/",
+                "name": "TW641 | Padavan CAKE 開源路由器韌體中心",
+                "description": "致力於對抗 Bufferbloat 網路延遲，提供多款經典路由器的 Padavan-CAKE 雲端編譯懶人包與演算法移植。",
+                "author": {
+                    "@type": "Person",
+                    "name": "TW641",
+                    "url": "https://github.com/TW641"
+                }
+            },
+            {
+                "@type": "SoftwareApplication",
+                "@id": "https://tw641.github.io/#software",
+                "name": "Padavan-CAKE Firmware",
+                "operatingSystem": "Linux",
+                "applicationCategory": "NetworkingApplication",
+                "description": "基於 Padavan 源碼並整合 CAKE 演算法的第三方開源路由器韌體，支援 142 款機型自動化雲端編譯。",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "TWD"
+                },
+                "author": {
+                    "@type": "Person",
+                    "name": "TW641",
+                    "url": "https://github.com/TW641"
+                }
+            }
+        ]
+    }
+    </script>
+
+    <style>
+        :root { --bg-color: #f6f8fa; --text-color: #24292f; --text-muted: #57606a; --card-bg: #ffffff; --link-color: #0550ae; --border-color: #d0d7de; --btn-bg: #2da44e; --btn-hover: #2c974b; --btn-text: #ffffff; --tag-bg: #eaf5ff; --tag-text: #0550ae; --table-header: #f3f6f9; --highlight-bg: #fff8c5; }
+        [data-theme="dark"] { --bg-color: #0d1117; --text-color: #c9d1d9; --text-muted: #8b949e; --card-bg: #161b22; --link-color: #79c0ff; --border-color: #30363d; --btn-bg: #238636; --btn-hover: #2ea043; --btn-text: #ffffff; --tag-bg: #1f2428; --tag-text: #79c0ff; --table-header: #21262d; --highlight-bg: #3a2e05; }
+        @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg-color: #0d1117; --text-color: #c9d1d9; --text-muted: #8b949e; --card-bg: #161b22; --link-color: #79c0ff; --border-color: #30363d; --btn-bg: #238636; --btn-hover: #2ea043; --btn-text: #ffffff; --tag-bg: #1f2428; --tag-text: #79c0ff; --table-header: #21262d; --highlight-bg: #3a2e05; } }
+        .theme-toggle-btn { position: fixed; bottom: 30px; right: 30px; background-color: var(--card-bg); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 50%; width: 50px; height: 50px; font-size: 1.5em; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: transform 0.2s ease, background-color 0.3s ease; z-index: 9999; display: flex; align-items: center; justify-content: center; }
+        .theme-toggle-btn:hover { transform: scale(1.1); }
+        body { background-color: var(--bg-color); color: var(--text-color); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 850px; margin: 0 auto; padding: 50px 20px; transition: background-color 0.3s ease, color 0.3s ease; }
+        h1, h2, h3 { color: var(--text-color); margin-top: 0; }
+        a { color: var(--link-color); text-decoration: none; font-weight: 600; transition: color 0.2s; }
+        a:hover { text-decoration: underline; }
+        .header-section { text-align: center; margin-bottom: 50px; }
+        .header-section h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .header-section p { font-size: 1.2em; color: var(--text-muted); }
+        .card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+        .card h2 { display: flex; align-items: center; font-size: 1.5em; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 20px; }
+        .card-list { list-style: none; padding: 0; margin: 0; }
+        .card-list > li { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px dashed var(--border-color); }
+        .card-list > li:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+        .card-list strong { font-size: 1.1em; }
+        .card-list p { margin: 8px 0 0 0; color: var(--text-muted); font-size: 0.95em; }
+        .feature-list { list-style: disc; padding-left: 20px; margin: 0; color: var(--text-muted); font-size: 0.95em; }
+        .feature-list li { margin-bottom: 8px; }
+        .feature-list b { color: var(--text-color); }
+        .thanks-list { list-style: none; padding-left: 0; margin-top: 10px; }
+        .thanks-list > li { margin-bottom: 12px; }
+        .sub-thanks-list { list-style-type: circle; padding-left: 20px; margin-top: 5px; margin-bottom: 10px; color: var(--text-color); }
+        .sub-thanks-list li { margin-bottom: 4px; border: none; padding-bottom: 0; font-size: 0.95em; }
+        .memory-img { max-width: 100%; height: auto; border: 1px solid var(--border-color); border-radius: 8px; margin-top: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: block; }
+        .btn { display: inline-block; padding: 10px 24px; background-color: var(--btn-bg); color: var(--btn-text) !important; border-radius: 6px; text-decoration: none; font-weight: bold; transition: background-color 0.2s; text-align: center; }
+        .btn:hover { background-color: var(--btn-hover); text-decoration: none; }
+        .tag { display: inline-block; padding: 2px 8px; font-size: 0.8em; border-radius: 12px; background-color: var(--tag-bg); color: var(--tag-text); margin-right: 8px; font-weight: normal; }
+        .code-block { background-color: var(--table-header); padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 0.9em; color: var(--link-color); }
+        details { background-color: var(--table-header); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 20px; margin-bottom: 15px; }
+        summary { font-weight: bold; cursor: pointer; outline: none; font-size: 1.1em; color: var(--link-color); }
+        summary:hover { text-decoration: underline; }
+        details p, details ul, details ol { margin-top: 15px; font-size: 0.95em; color: var(--text-color); }
+        .table-container { overflow-x: auto; margin-top: 10px; }
+        .device-table { width: 100%; border-collapse: collapse; font-size: 0.9em; min-width: 500px; }
+        .device-table th, .device-table td { border-bottom: 1px solid var(--border-color); padding: 8px 10px; text-align: left; }
+        .device-table th { font-weight: bold; background-color: rgba(0,0,0,0.03); }
+        .device-table tr:hover td { background-color: rgba(0,0,0,0.02); }
+        .footer { text-align: center; margin-top: 60px; font-size: 0.9em; color: var(--text-muted); }
+        .quote-box { background-color: var(--bg-color); padding: 15px; border-left: 4px solid var(--link-color); border-radius: 4px; margin-top: 15px; font-size: 0.95em; color: var(--text-color); }
+        .highlight-box { background-color: var(--highlight-bg); border: 1px solid #d4a72c; padding: 15px; border-radius: 8px; margin-top: 20px; }
+        @media (max-width: 600px) { .header-section h1 { font-size: 1.6em; } .header-section p { font-size: 1em; } }
+    </style>
+</head>
+<body>
+
+    <header class="header-section">
+        <h1>🇹🇼 TW641 Padavan CAKE <span style="display: inline-block;">開源路由器</span><span style="display: inline-block;">韌體中心</span></h1>
+        <p>致力於對抗 Bufferbloat，為老舊路由器注入新生命</p>
+        <a href="https://github.com/TW641" target="_blank" rel="noopener noreferrer" class="btn" style="margin-top: 15px; background-color: var(--border-color); color: var(--text-color) !important;">⭐ 追蹤我的 GitHub (TW641)</a>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>📦 開源專案精選特輯 (Repositories)</h2>
+            <ul class="card-list">
+                <li>
+                    👉 <strong><a href="https://tw641.github.io/Padavan-CAKE/" target="_blank" rel="noopener noreferrer">Padavan-CAKE 雲端編譯懶人包 (入口網站)</a></strong>
+                    <p><span class="tag">Guide</span> 全球首發！精準支援 142 款機型，包含完整的圖文教學與 14 種多國語言支援。一鍵雲端編譯專屬你的抗延遲神器。</p>
+                </li>
+                <li>
+                    🍰 <strong><a href="https://github.com/TW641/sch_cake" target="_blank" rel="noopener noreferrer">sch_cake (The "Dave Täht Tribute" Edition)</a></strong>
+                    <p><span class="tag">C</span> 獨立移植 (backport/port) 的 CAKE 演算法核心代碼。紀念 Dave Täht 緩衝膨脹緩解之魂 — "When you miss Dave, modprobe sch_cake!"</p>
+                </li>
+                <li>
+                    🟢 <strong><a href="https://github.com/TW641/padavan-builder-workflow" target="_blank" rel="noopener noreferrer">padavan-builder-workflow</a> & <a href="https://github.com/TW641/padavan-ng" target="_blank" rel="noopener noreferrer">padavan-ng</a> (Kernel 3.4)</strong>
+                    <p><span class="tag">Actions</span> <span class="tag">C</span> Padavan 3.4 經典老機專區。支援 Archer C2, MI-R3G 等經典老設備，結合自動化雲端編譯，讓舊機器也能發揮頂尖的流量調度能力。</p>
+                </li>
+                <li>
+                    🔵 <strong><a href="https://github.com/TW641/padavan-4.4" target="_blank" rel="noopener noreferrer">padavan-4.4 (Kernel 4.4)</a></strong>
+                    <p><span class="tag">Actions</span> <span class="tag">C</span> Padavan 4.4 進階機型專區。支援 K2P, DIR-878 等進階機型，提供極致穩定的核心與硬體加速體驗，結合自動化雲端編譯，讓舊機器也能發揮頂尖的流量調度能力。</p>
+                </li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>📌 韌體版本特色速覽</h2>
+            <ul class="feature-list">
+                <li><b>核心突破：</b>提供 Linux Kernel 3.4.113 與 4.4.198 雙版本，大幅領先原廠舊核心。</li>
+                <li><b>效能解放：</b>全系列整合 CAKE 流量調度、HWNAT (硬體加速) + SFE (軟體加速)。</li>
+                <li><b>介面優化：</b>內建繁體中文，並針對 1080P 寬螢幕進行排版優化。</li>
+                <li><b>穩定提升：</b>修復 MT7610E 無線驅動斷線問題，啟用快速重連；4.4 版本採用最穩定的 Iptables 1.8.7 與 libmnl 1.0.5 組合。</li>
+                <li><b>安全防護：</b>全面升級 Busybox 1.37.0，修復多個 CVE 高風險漏洞。</li>
+            </ul>
+
+            <div class="quote-box">
+                <i>(註：我先前的舊專案放在舊帳號 TWShiyuLiou1997，現在成功運作的成品都會集中在新的 <b>TW641</b> 帳號中，兩個首頁我都放在下面，請以新倉庫的 Actions 為主喔！如果您覺得這個專案有幫助到您，請幫我點選下方連結 <b>Follow</b> 我的 GitHub 帳號給予支持與鼓勵！)</i><br><br>
+                👉 我的全新 GitHub 首頁 (TW641)：<a href="https://github.com/TW641" target="_blank" rel="noopener">https://github.com/TW641</a><br>
+                👉 我的舊版 GitHub 首頁 (TWShiyuLiou1997)：<a href="https://github.com/TWShiyuLiou1997" target="_blank" rel="noopener">https://github.com/TWShiyuLiou1997</a>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🌍 來自國際開源界與總統級的肯定！(真正的數位國民外交)</h2>
+            <p style="margin-bottom: 20px;"><b>這個專案</b>不僅成功在台灣論壇發布，更在國際開源社群引起了巨大的迴響，這對身為唯一開發者的我來說，是極大的肯定與驚喜：</p>
+            
+            <ul class="card-list">
+                <li>
+                    <b>🇹🇼🤝🇨🇿 來自捷克的國際開源大神的親自認可：</b>
+                    <p>我的 GitHub 專案成功獲得了 <b>LibreQoS 營運長 Frantisek (Frank) Borsik</b> 的親自追蹤與肯定！Frank 來自<b>捷克布拉格地區</b>，在國際開源網路界大有來頭，曾負責知名開源路由器 Turris (OpenWrt) 以及 RF elements 的核心推廣。這代表<b>本專案</b>已經成功打入全球「對抗 Bufferbloat (緩衝膨脹)」社群的最核心圈！能與來自友好捷克的專家交流，真的是莫大的榮幸。</p>
+                </li>
+                <li>
+                    <b>🇹🇼🤝🇯🇵 來自日本的頂尖網路學者的跨國關注：</b>
+                    <p>來自日本頂尖名校 <b>慶應義塾大學 (Keio University) 的 Dikshie 博士</b> 也親自給予<b>此專案</b>關注與認可！Dikshie 博士專攻 P2P 網路、網際網路架構與網路科學，能獲得這類精於底層網路基礎設施的重量級學者肯定，證明了這份演算法移植的技術含金量極高！</p>
+                </li>
+                <li>
+                    <b>🇹🇼 總統級的數位國民外交：</b>
+                    <p>LibreQoS 官方甚至在 X (Twitter)、Facebook 與 LinkedIn 等國際社群平台上發布<b>貼文致敬</b>，將<b>這個專案</b>譽為給 Dave Täht 的 <b>"Time-Traveling Valentine's Gift" (穿越時空的情人節禮物)</b>，並在文中史無前例地標註了<b>台灣總統賴清德、前總統蔡英文與總統府發言人</b>！能讓台灣的開源技術貢獻躍上國際版面，這真的是貨真價實的國民外交！🇹🇼</p>
+                </li>
+            </ul>
+
+            <div class="highlight-box">
+                <div style="text-align: center; font-weight: bold; margin-bottom: 15px; font-size: 1.1em;">👇 需要大家的火力支援！讓世界看見台灣的貢獻！👇</div>
+                <p style="margin-top: 0; margin-bottom: 15px;">如果你也為這份「數位國民外交」感到熱血沸騰，懇請花個 10 秒鐘，點選下方的 LibreQoS 官方社群貼文連結，幫忙 <b>按讚、留言、分享</b>！讓這份來自台灣的跨國界致敬傳遞給全世界：</p>
+                <ul style="list-style: none; padding-left: 0; margin: 0;">
+                    <li style="margin-bottom: 8px;">👉 <b>X (Twitter) 貼文按讚分享：</b> <a href="https://x.com/LibreQoS/status/2022688823361126545" target="_blank" rel="noopener" style="word-break: break-all;">https://x.com/LibreQoS/status/2022688823361126545</a></li>
+                    <li style="margin-bottom: 8px;">👉 <b>Facebook 貼文按讚分享：</b> <a href="https://www.facebook.com/libreqos/posts/pfbid02JCNKynFeQ48FdBMFbVoAoWFDLfgiA55mH3Fyz76xKHdEU86XkxgVziWzXoRYbbT1l" target="_blank" rel="noopener" style="word-break: break-all;">https://www.facebook.com/libreqos/posts/pfbid02JCNKynFeQ48FdBMFbVoAoWFDLfgiA55mH3Fyz76xKHdEU86XkxgVziWzXoRYbbT1l</a></li>
+                    <li style="margin-bottom: 8px;">👉 <b>LinkedIn 貼文按讚分享：</b> <a href="https://www.linkedin.com/posts/libreqos_davetaht-routers-bufferbloat-activity-7428458742301659136-YAL2" target="_blank" rel="noopener" style="word-break: break-all;">https://www.linkedin.com/posts/libreqos_davetaht-routers-bufferbloat-activity-7428458742301659136-YAL2</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>🔧 技術支援與機型總表 (Technical Details)</h2>
+            <p>本區塊收錄了改善 Bufferbloat 的完整支援清單與編譯教學。</p>
+            
+            <details>
+                <summary>🍰 A PIECE OF CAKE！超簡單雲端編譯法 (免架環境)</summary>
+                <p>這真的是 Piece of cake！我已經把所有設定都寫進 GitHub Actions 裡了。你完全不需要會寫程式，只要會點選滑鼠，幾分鐘就能得到專屬你的韌體檔！</p>
+                <ol style="padding-left: 20px;">
+                    <li style="margin-bottom: 10px;"><strong>向原創致敬：</strong>前往 GitHub <a href="https://github.com/TW641/sch_cake" target="_blank" rel="noopener noreferrer">紀念倉庫</a> 點亮星星 (Star) 向 Dave Täht 致敬。</li>
+                    <li style="margin-bottom: 10px;"><strong>Fork 專案：</strong>根據下方表格找到代碼後，Fork 對應專案 (<a href="https://github.com/TW641/padavan-builder-workflow" target="_blank" rel="noopener noreferrer">3.4 經典老機</a> 或 <a href="https://github.com/TW641/padavan-4.4" target="_blank" rel="noopener noreferrer">4.4 進階機型</a>)。</li>
+                    <li style="margin-bottom: 10px;"><strong>啟用 Actions：</strong>進入專案點選 <strong>Actions</strong> 並點選綠色按鈕啟用工作流程。</li>
+                    <li style="margin-bottom: 10px;"><strong>選擇流程：</strong>3.4 機型點選 <span class="code-block">Build firmware (Ultimate Fix...)</span>；4.4 機型點選 <span class="code-block">Custom-Router-Build-Final-Fix</span>。</li>
+                    <li style="margin-bottom: 10px;"><strong>開始編譯：</strong>點選右側 <strong>Run workflow</strong> 下拉選單。在 Target Model 輸入「選項代碼」，語言填入 <span class="code-block">CN</span> (繁體中文)，點選綠色按鈕執行。</li>
+                    <li style="margin-bottom: 10px;"><strong>下載韌體：</strong>等待約 10~15 分鐘亮起綠色打勾 ✅ 後，點進流程至最下方 <strong>Artifacts</strong> 下載專屬 <code>.bin</code> 韌體！</li>
+                </ol>
+            </details>
+
+            <details>
+                <summary>📜 完整 142 款支援機型總表 (點這裡展開)</summary>
+                <div class="table-container">
+                    <p style="margin-top: 5px; font-weight: bold;">🟢 Kernel 3.4 經典老爺機 (共 125 款選項)</p>
+                    <table class="device-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 25%;">品牌 (A-Z)</th>
+                                <th>支援型號：商品名稱 <span class="code-block">(選項代碼)</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>5K</strong></td><td>5K-W20 <span class="code-block">(5K-W20)</span></td></tr>
+                            <tr><td><strong>A5</strong></td><td>A5-V11 16M <span class="code-block">(A5-V11_16M)</span>, A5-V11 4M <span class="code-block">(A5-V11_4M)</span>, A5-V11 8M <span class="code-block">(A5-V11_8M)</span></td></tr>
+                            <tr><td><strong>ATEL</strong></td><td>ALR-U270 <span class="code-block">(ALR-U270)</span></td></tr>
+                            <tr><td><strong>ASUS (華碩)</strong></td><td>RP-AC56 <span class="code-block">(RP-AC56)</span>, RT-AC1200 <span class="code-block">(RT-AC1200)</span>, RT-AC1200GU <span class="code-block">(RT-AC1200GU)</span>, RT-AC1200HP <span class="code-block">(RT-AC1200HP)</span>, RT-AC51U <span class="code-block">(RT-AC51U)</span>, RT-AC54U <span class="code-block">(RT-AC54U)</span>, RT-N10 C1 <span class="code-block">(RT-N10C1)</span>, RT-N11P <span class="code-block">(RT-N11P)</span>, RT-N11P B1 <span class="code-block">(RT-N11PB1)</span>, RT-N12+ <span class="code-block">(RT-N12plus)</span>, RT-N13U B1 <span class="code-block">(RT-N13UB1)</span>, RT-N14U <span class="code-block">(RT-N14U)</span>, RT-N56U <span class="code-block">(RT-N56U)</span>, RT-N56U GE2 <span class="code-block">(RT-N56U-GE2)</span>, RT-N56U B1 <span class="code-block">(RT-N56UB1)</span></td></tr>
+                            <tr><td><strong>BELKIN</strong></td><td>F9K1103 <span class="code-block">(F9K1103)</span></td></tr>
+                            <tr><td><strong>D-Link (友訊)</strong></td><td>DIR-300 B1 <span class="code-block">(DIR-300B1)</span>, DIR-300 B7 <span class="code-block">(DIR-300B7)</span>, DIR-320 B1 <span class="code-block">(DIR-320B1)</span>, DIR-620 A1 <span class="code-block">(DIR-620A1)</span>, DIR-620 D1 <span class="code-block">(DIR-620D1)</span>, DIR-860L <span class="code-block">(DIR-860L)</span>, DIR-882 <span class="code-block">(DIR-882)</span></td></tr>
+                            <tr><td><strong>GL.iNet</strong></td><td>GL-MT300A <span class="code-block">(GL-MT300A)</span>, GL-MT300N <span class="code-block">(GL-MT300N)</span>, GL-MT300N V2 <span class="code-block">(GL-MT300NV2)</span></td></tr>
+                            <tr><td><strong>HiWiFi (极路由)</strong></td><td>HC5661A <span class="code-block">(HC5661A)</span></td></tr>
+                            <tr><td><strong>Kroks</strong></td><td>KNDRT31R26 <span class="code-block">(KNDRT31R26)</span>, KNDRT31R3 <span class="code-block">(KNDRT31R3)</span></td></tr>
+                            <tr><td><strong>Linksys</strong></td><td>EA-8100 <span class="code-block">(EA-8100)</span></td></tr>
+                            <tr><td><strong>MQMaker</strong></td><td>WiTi 256M <span class="code-block">(MQ-WITI-256)</span>, WiTi 512M <span class="code-block">(MQ-WITI-512)</span></td></tr>
+                            <tr><td><strong>Newifi (新路由)</strong></td><td>Newifi D1 <span class="code-block">(NEWIFI-D1)</span>, Newifi D2 <span class="code-block">(NEWIFI-D2)</span>, Newifi Mini <span class="code-block">(NEWIFI-MINI)</span>, Newifi Y1S <span class="code-block">(NEWIFI-Y1S)</span></td></tr>
+                            <tr><td><strong>Nexx</strong></td><td>WT3020A <span class="code-block">(WT3020A)</span>, WT3020H <span class="code-block">(WT3020H)</span>, WT3020H 16M <span class="code-block">(WT3020H16M)</span></td></tr>
+                            <tr><td><strong>Phicomm (斐讯)</strong></td><td>PSG1218 256M <span class="code-block">(256PSG1218)</span>, PSG1218 <span class="code-block">(PSG1218)</span></td></tr>
+                            <tr><td><strong>Samsung (三星)</strong></td><td>SWR1100 <span class="code-block">(SWR1100)</span></td></tr>
+                            <tr><td><strong>Sercomm</strong></td><td>RT-S1010 <span class="code-block">(RT-S1010)</span>, Smartbox SPI <span class="code-block">(SMARTBOX_SPI)</span>, SMBX Pro NAND <span class="code-block">(SMBXPRONAND)</span>, SMBX Turbo <span class="code-block">(SMBXTURBO)</span></td></tr>
+                            <tr><td><strong>SNR</strong></td><td>SNR-MD1 <span class="code-block">(SNR-MD1)</span>, SNR-ME1 <span class="code-block">(SNR-ME1)</span>, SNR-W4N-M <span class="code-block">(SNR-W4N-M)</span>, SNR-W4N-M USB <span class="code-block">(SNR-W4N-M_USB)</span></td></tr>
+                            <tr><td><strong>Totolink</strong></td><td>A3004NS <span class="code-block">(A3004NS)</span></td></tr>
+                            <tr><td><strong>TP-Link</strong></td><td>Archer C2 V1 <span class="code-block">(TL_C2-V1)</span>, Archer C20 V1 <span class="code-block">(TL_C20-V1)</span>, Archer C20 V1 16M <span class="code-block">(TL_C20-V1_16M)</span>, Archer C20 V4 <span class="code-block">(TL_C20-V4)</span>, Archer C20 V5 <span class="code-block">(TL_C20-V5)</span>, Archer C5 V4 <span class="code-block">(TL_C5-V4)</span>, Archer C50 V1 <span class="code-block">(TL_C50-V1)</span>, Archer C50 V3 <span class="code-block">(TL_C50-V3)</span>, Archer C50 V4 <span class="code-block">(TL_C50-V4)</span>, EC220-G5 V2 <span class="code-block">(TL_EC220_G5-V2)</span>, MR200 V1 <span class="code-block">(TL_MR200-V1)</span>, MR3020 V3 <span class="code-block">(TL_MR3020-V3)</span>, MR3420 V5 <span class="code-block">(TL_MR3420-V5)</span>, WDR7300 V5 <span class="code-block">(TL_WDR7300-V5)</span>, WR840N V4 <span class="code-block">(TL_WR840N-V4)</span>, WR840N V4 USB <span class="code-block">(TL_WR840N-V4_USB)</span>, WR840N V5 <span class="code-block">(TL_WR840N-V5)</span>, WR840N V5 RU <span class="code-block">(TL_WR840N-V5_RU)</span>, WR840N V6 <span class="code-block">(TL_WR840N-V6)</span>, WR841N V13 <span class="code-block">(TL_WR841N-V13)</span>, WR841N V13 USB <span class="code-block">(TL_WR841N-V13_USB)</span>, WR841N V14 <span class="code-block">(TL_WR841N-V14)</span>, WR841N V14 8M <span class="code-block">(TL_WR841N-V14_8M)</span>, WR842N V5 <span class="code-block">(TL_WR842N-V5)</span>, WR845N V3 <span class="code-block">(TL_WR845N-V3)</span>, WR845N V4 <span class="code-block">(TL_WR845N-V4)</span></td></tr>
+                            <tr><td><strong>Tuoshi</strong></td><td>TS7620N <span class="code-block">(TS7620N)</span></td></tr>
+                            <tr><td><strong>Ubiquiti</strong></td><td>EdgeRouter X <span class="code-block">(UBNT-ERX)</span></td></tr>
+                            <tr><td><strong>Unielec</strong></td><td>U7621-06 <span class="code-block">(U7621-06)</span></td></tr>
+                            <tr><td><strong>Wall-AP</strong></td><td>Wall-AP <span class="code-block">(WALL-AP)</span></td></tr>
+                            <tr><td><strong>Xiaomi (小米/红米)</strong></td><td>Mi Router 3 <span class="code-block">(MI-3)</span>, Mi Router 3 SPI <span class="code-block">(MI-3_SPI)</span>, Mi Router 3C <span class="code-block">(MI-3C)</span>, Mi Router 3G <span class="code-block">(MI-R3G)</span>, Mi Router 3G SPI <span class="code-block">(MI-R3G_SPI)</span>, Mi Router 3G v2 <span class="code-block">(MI-R3Gv2)</span>, Mi Router 3 Pro <span class="code-block">(MI-R3PRO)</span>, Mi Router 3P SPI <span class="code-block">(MI-R3P_SPI)</span>, Mi Router 4 <span class="code-block">(MI-4)</span>, Mi Router 4A 100M <span class="code-block">(MI-4A_100M)</span>, Mi Router 4C <span class="code-block">(MI-4C)</span>, Mi Router Mini <span class="code-block">(MI-MINI)</span>, Mi Router Nano <span class="code-block">(MI-NANO)</span>, Xiaomi Router 2100 <span class="code-block">(R2100)</span>, Redmi Router AC2100 <span class="code-block">(RM-AC2100)</span></td></tr>
+                            <tr><td><strong>Youhua (友华)</strong></td><td>WR1200JS <span class="code-block">(WR1200JS)</span></td></tr>
+                            <tr><td><strong>Youku (优酷)</strong></td><td>YK-L1 <span class="code-block">(YK-L1)</span>, YK-L1C <span class="code-block">(YK-L1C)</span></td></tr>
+                            <tr><td><strong>ZBT</strong></td><td>WE1326 <span class="code-block">(ZBT-WE1326)</span>, WE1626 <span class="code-block">(ZBT-WE1626)</span>, WE826-T2 <span class="code-block">(ZBT-WE826T2)</span>, WG3526 <span class="code-block">(ZBT-WG3526)</span>, WG3526-32 <span class="code-block">(ZBT-WG3526-32)</span>, WR8305RT <span class="code-block">(ZBT-WR8305RT)</span></td></tr>
+                            <tr><td><strong>ZTE (中兴)</strong></td><td>E8820S <span class="code-block">(ZTE_E8820S)</span></td></tr>
+                            <tr><td><strong>ZyXEL (Keenetic)</strong></td><td>KN-4G3 <span class="code-block">(KN-4G3)</span>, KN-4G3B <span class="code-block">(KN-4G3B)</span>, KN-EXTRA <span class="code-block">(KN-EXTRA)</span>, KN-EXTRA2 <span class="code-block">(KN-EXTRA2)</span>, KN-GIGA3 <span class="code-block">(KN-GIGA3)</span>, KN-LITE <span class="code-block">(KN-LITE)</span>, KN-LITE2 <span class="code-block">(KN-LITE2)</span>, KN-LITE3 <span class="code-block">(KN-LITE3)</span>, KN-LITE3B <span class="code-block">(KN-LITE3B)</span>, KN-OMNI <span class="code-block">(KN-OMNI)</span>, KN-OMNI2 <span class="code-block">(KN-OMNI2)</span>, KN-START2 <span class="code-block">(KN-START2)</span>, KN-ULTRA2 <span class="code-block">(KN-ULTRA2)</span>, KN-VIVA <span class="code-block">(KN-VIVA)</span></td></tr>
+                        </tbody>
+                    </table>
+
+                    <p style="margin-top: 25px; font-weight: bold;">🔵 Kernel 4.4 進階機型 (共 17 種選項)</p>
+                    <table class="device-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 25%;">品牌 (A-Z)</th>
+                                <th>支援型號：商品名稱 <span class="code-block">(選項代碼)</span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>D-Link (友訊)</strong></td><td>DIR-878 <span class="code-block">(DIR-878)</span>, DIR-882 <span class="code-block">(DIR-882)</span></td></tr>
+                            <tr><td><strong>JCG (捷稀)</strong></td><td>836PRO <span class="code-block">(JCG-836PRO)</span>, AC860M <span class="code-block">(JCG-AC860M)</span>, Q20 <span class="code-block">(JCG-Q20)</span>, Y2 <span class="code-block">(JCG-Y2)</span></td></tr>
+                            <tr><td><strong>Motorola (摩托羅拉)</strong></td><td>MR2600 <span class="code-block">(MR2600)</span></td></tr>
+                            <tr><td><strong>Netgear (網件)</strong></td><td>BZV <span class="code-block">(NETGEAR-BZV)</span></td></tr>
+                            <tr><td><strong>Newifi (新路由)</strong></td><td>Newifi 3 <span class="code-block">(NEWIFI3)</span></td></tr>
+                            <tr><td><strong>Phicomm (斐讯)</strong></td><td>K2P <span class="code-block">(K2P)</span>, K2P Nano <span class="code-block">(K2P-NANO)</span>, K2P USB <span class="code-block">(K2P-USB)</span></td></tr>
+                            <tr><td><strong>Xiaomi (小米/红米)</strong></td><td>CR660x <span class="code-block">(CR660x)</span>, Mi Router 3G <span class="code-block">(MI-R3G)</span>, Mi Router 3 Pro <span class="code-block">(MI-R3P)</span>, Redmi Router 2100 <span class="code-block">(RM2100)</span></td></tr>
+                            <tr><td><strong>XiaoYu (小渔)</strong></td><td>XY-C1 <span class="code-block">(XY-C1)</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </details>
+        </section>
+
+        <section class="card">
+            <h2>💖 幕後故事與特別致謝 (Behind the Scenes & Credits)</h2>
+            <p>這個專案的誕生，除了技術的積累，更離不開開源社群前輩們的啟發與無私奉獻。滿滿的感謝獻給以下所有人與組織：</p>
+            
+            <ul class="card-list">
+                <li>
+                    🕊️ <strong>致敬開源先驅：In Loving Memory of Dave Täht (1965–2025)</strong>
+                    <div class="quote-box" style="margin-top: 10px;">
+                        <p style="margin-top: 0;"><em>"When you miss Dave, modprobe sch_cake!"</em></p>
+                        <p>Dave 是一位偉大的網路技術開源貢獻者。2016 年他曾預言 MT76 會是開源網路新星，但苦尋不到合適設備測試。幾年後的今天，我透過本專案讓成千上萬台基於 MediaTek (MT76) 的設備成功跑起他撰寫的 CAKE 演算法。His wish, I finished.</p>
+                        <p style="margin-top: 10px; margin-bottom: 0;">本專案更被 LibreQoS 官方譽為給 Dave 的 <strong>"Time-Traveling Valentine's Gift" (穿越時空的情人節禮物)</strong>，躍上國際開源社群版面。</p>
+                    </div>
+                </li>
+
+                <li>
+                    💡 <strong>特別回憶錄：那些年我們一起搞的第三方固件</strong>
+                    <p>其實當年我是負責 Tomato Phoenix 不死鳥的繁體中文翻譯。下方附上當年 Tomato Phoenix 不死鳥的百度網盤下載連結與歷史截圖：<br>
+                    <a href="http://pan.baidu.com/s/1jIGpbQe" target="_blank" rel="noopener noreferrer">🔗 http://pan.baidu.com/s/1jIGpbQe</a></p>
+                    
+                    <img class="memory-img" src="https://tw641.github.io/Padavan-CAKE/images/Tomato-Phoenix-Archive.png" alt="Tomato Phoenix 不死鳥第三方韌體歷史資源截圖" loading="lazy" decoding="async" width="800" height="450">
+
+                    <p style="margin-top: 20px;">請看下方圖片！這是我當年和陆明峰、佐须之男合作時，他親手寫的感謝紙條和送的禮物。我直到今天都還留著，而且這些感謝如今都仍記在心裡！</p>
+                    
+                    <img class="memory-img" src="https://tw641.github.io/Padavan-CAKE/images/ForgotFun.jpg" alt="恩山論壇 佐須之男 (ForgotFun) 開源合作感謝紙條" loading="lazy" decoding="async" width="800" height="600">
+
+                    <div class="quote-box">
+                        「佐须之男长期致力于国内第三方免费固件的开发，期间靠的是广大用户的支持才能坚持到现在。一路走来的过程中有喝彩也有唏嘘，但我从未停止过脚步，并希望我能继续再坚持下去。希望广大的用户在力所能及的前提下能给予我些赞助，让这份梦想得以延续。」
+                    </div>
+                    <p style="margin-top: 10px;">這不是我的帳號，但就讓我們一起幫他一把吧，感謝他多年來的開源貢獻。如果您想支持他，請前往他的官方網站：<br>
+                    <a href="https://www.tomato.org.cn/donate-us.html" target="_blank" rel="noopener noreferrer">👉 Tomato 贊助頁面</a> | <a href="https://forgotfun.org/helpus.html" target="_blank" rel="noopener noreferrer">👉 ForgotFun 贊助頁面</a></p>
+                </li>
+
+                <li>
+                    🤝 <strong>特別致謝名單 (Special Acknowledgments)</strong>
+                    <p>感謝以下企業、組織、前輩與夥伴在開源精神、技術合作、無私引薦與硬體測試上的啟發與貢獻：</p>
+                    <ul class="thanks-list">
+                        <li>🏢 <strong>企業與組織：</strong>
+                            <ul class="sub-thanks-list">
+                                <li><a href="https://www.gl-inet.cn/" target="_blank" rel="noopener noreferrer">GL.iNet - 深圳市广联智通科技有限公司</a></li>
+                                <li><a href="https://www.gl-inet.com/" target="_blank" rel="noopener noreferrer">GL.iNet - GL Technologies (Hong Kong) Limited</a></li>
+                                <li><a href="https://libreqos.io/" target="_blank" rel="noopener noreferrer">LibreQoS - LibreQoE, LLC</a></li>
+                            </ul>
+                        </li>
+                        <li>💻 <strong>開發者與貢獻者 (按字母排列)：</strong>
+                            <ul class="sub-thanks-list">
+                                <li>Alfie Zhao</li>
+                                <li>Allen Liu</li>
+                                <li>Dave Täht</li>
+                                <li>Frantisek Borsik (Frank)</li>
+                                <li>Jacqueline Wang</li>
+                                <li>Wingsley Yik</li>
+                                <li>佐须之男 (ForgotFun)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    🗣️ <strong>恩山論壇許願池</strong>
+                    <p>順帶一提，最近在論壇看到有版友發帖問：恩山為什麼沒有 GL.iNet 版塊？藉著這篇技術分享，我也想在此向管理員許願：<br>
+                    <strong>強烈希望能開立一個 GL.iNet 專屬板塊！</strong> 這樣大家討論相關技術跟固件會更方便集中！<br>
+                    <a href="https://www.right.com.cn/forum/forum.php?mod=viewthread&tid=8463592&fromuid=1047490&fromuser=TW641" target="_blank" rel="noopener noreferrer">👉 前往 恩山无线论坛 參與討論</a></p>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© <span id="year"></span> TW641. Built with passion for a Bufferbloat-free world.</p>
+    </footer>
+
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="切換亮暗色模式" title="切換亮暗色模式">
+        🌓
+    </button>
+
+    <script>
+        document.getElementById("year").textContent=new Date().getFullYear();
+        const themeToggleBtn=document.getElementById('theme-toggle');
+        const rootElement=document.documentElement;
+        const currentTheme=localStorage.getItem('theme');
+        const prefersDarkScheme=window.matchMedia('(prefers-color-scheme: dark)');
+        if(currentTheme==='dark'){
+            rootElement.setAttribute('data-theme','dark');
+            themeToggleBtn.textContent='☀️';
+        }else if(currentTheme==='light'){
+            rootElement.setAttribute('data-theme','light');
+            themeToggleBtn.textContent='🌙';
+        }else{
+            themeToggleBtn.textContent=prefersDarkScheme.matches?'☀️':'🌙';
+        }
+        themeToggleBtn.addEventListener('click',()=>{
+            let isDark=rootElement.getAttribute('data-theme')==='dark'||(!rootElement.hasAttribute('data-theme')&&prefersDarkScheme.matches);
+            if(isDark){
+                rootElement.setAttribute('data-theme','light');
+                localStorage.setItem('theme','light');
+                themeToggleBtn.textContent='🌙';
+            }else{
+                rootElement.setAttribute('data-theme','dark');
+                localStorage.setItem('theme','dark');
+                themeToggleBtn.textContent='☀️';
+            }
+        });
+    </script>
+</body>
+</html>
